@@ -1,4 +1,3 @@
-
 def selection_sort(lists):
     length = len(lists)
 
