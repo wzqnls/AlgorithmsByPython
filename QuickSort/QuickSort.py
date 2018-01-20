@@ -1,6 +1,13 @@
+import random
+
 from SortTest.SortTest import SortTest
 
+
 class QuickSort(object):
+    """
+    随机化快速排序算法
+    对于近乎有序的数组排序又很大性能提升
+    """
 
     @classmethod
     def sort(cls, lists, *args):
@@ -20,7 +27,11 @@ class QuickSort(object):
 
     @staticmethod
     def partition(lists, l, r):
-        # v代表表定点的值
+
+        # 随机化标定点
+        random_index = int(random.random() * (r - l + 1) + l)
+        lists[l], lists[random_index] = lists[random_index], lists[l]
+        # v代表标定点的值
         v = lists[l]
 
         # arr[l + 1...j] < v; arr[j + 1...i] < v
@@ -34,8 +45,6 @@ class QuickSort(object):
 
 
 if __name__ == '__main__':
-    test_lists = SortTest.generate_random_list(20, 0, 10000)
-    print(test_lists)
-    print('\n')
+    # test_lists = SortTest.generate_random_list(1000, 0, 1000)
+    test_lists = SortTest.generate_near_ordered_list(1000000, 1000)
     SortTest.test_sort(QuickSort, test_lists)
-    print(test_lists)
