@@ -5,10 +5,21 @@ from SortTest.SortTest import SortTest
 
 class MaxHeap(object):
 
-    def __init__(self, capacity):
-        self.capacity = capacity
-        self.count = 0
-        self.data = [-1] * (capacity + 1)
+    def __init__(self, capacity=None, lists=[]):
+        if capacity is not None:
+            self.capacity = capacity
+            self.count = 0
+            self.data = [-1] * (capacity + 1)
+        else:
+            self.capacity = len(lists)
+            self.data = [-1] * (self.capacity + 1)
+            self.count = len(lists)
+
+            for i in range(len(lists)):
+                self.data[i + 1] = lists[i]
+
+            for i in range(self.count // 2, 1, -1):
+                self.shift_down(i)
 
     def size(self):
         return self.count
